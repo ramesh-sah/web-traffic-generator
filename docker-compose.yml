@@ -11,3 +11,19 @@ services:
     restart: unless-stopped
     env_file:
       - .env.example
+
+    # Critical fix for "Too many open files"
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 2097152
+
+    # Resource limits (adjust according to your server)
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
