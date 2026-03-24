@@ -1,294 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEO Traffic Booster Pro</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        /* Login Overlay */
-        #login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 10, 20, 0.98);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            backdrop-filter: blur(10px);
-        }
-
-        .login-box {
-            background: rgba(20, 20, 40, 0.95);
-            border: 1px solid rgba(100, 100, 255, 0.3);
-            border-radius: 16px;
-            padding: 40px 50px;
-            width: 380px;
-            text-align: center;
-            box-shadow: 0 0 60px rgba(80, 80, 255, 0.2);
-            animation: fadeInScale 0.4s ease;
-        }
-
-        .login-box h1 {
-            margin: 0 0 30px 0;
-            font-size: 28px;
-            background: linear-gradient(90deg, #00ffea, #6e00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .login-box .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .login-box label {
-            display: block;
-            margin-bottom: 8px;
-            color: #aaa;
-            font-size: 14px;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid rgba(100, 100, 255, 0.4);
-            border-radius: 8px;
-            background: rgba(10, 10, 30, 0.8);
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .login-box input:focus {
-            outline: none;
-            border-color: #6e00ff;
-            box-shadow: 0 0 0 3px rgba(110, 0, 255, 0.2);
-        }
-
-        .login-error {
-            color: #ff4444;
-            margin: 15px 0;
-            font-size: 14px;
-            min-height: 20px;
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(90deg, #6e00ff, #00ffea);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(110, 0, 255, 0.4);
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-    </style>
 </head>
-
 <body>
-
-    <!-- LOGIN OVERLAY -->
-    <div id="login-overlay">
-        <div class="login-box glass">
-            <i class="fa-solid fa-rocket fa-3x text-gradient" style="margin-bottom: 20px;"></i>
-            <h1>SEO BOOSTER PRO</h1>
-
-            <div class="input-group">
-                <label>Username</label>
-                <input type="text" id="username" placeholder="admin" value="admin" autocomplete="off">
-            </div>
-
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="password" placeholder="Enter password" autocomplete="off">
-            </div>
-
-            <div class="login-error" id="error-msg"></div>
-
-            <button class="btn-login" onclick="handleLogin()">
-                <i class="fa-solid fa-right-to-bracket"></i> LOGIN
-            </button>
-
-            
-        </div>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
     </div>
 
-    <!-- MAIN DASHBOARD (Hidden until login) -->
-    <div id="dashboard" style="display: none;">
-        <div class="background-effects">
-            <div class="glow-orb orb-1"></div>
-            <div class="glow-orb orb-2"></div>
-            <div class="glow-orb orb-3"></div>
-        </div>
+    <div class="container">
+        <header class="dashboard-header glass fade-in">
+            <div class="brand">
+                <i class="fa-solid fa-rocket text-gradient"></i>
+                <h1>SEO <span>BOOSTER</span> PRO</h1>
+            </div>
+            <div class="status-indicator">
+                <span id="status-dot" class="dot offline"></span>
+                <span id="status-text">OFFLINE</span>
+            </div>
+        </header>
 
-        <div class="container">
-            <header class="dashboard-header glass fade-in">
-                <div class="brand">
-                    <i class="fa-solid fa-rocket text-gradient"></i>
-                    <h1>SEO <span>BOOSTER</span> PRO</h1>
+        <main class="grid-layout">
+            <!-- Controls Section -->
+            <section class="controls panel glass slide-up" style="animation-delay: 0.1s;">
+                <h2>Current Target</h2>
+                <div class="target-url-box">
+                    <i class="fa-solid fa-link"></i>
+                    <span id="target-url">Loading...</span>
                 </div>
-                <div class="status-indicator">
-                    <span id="status-dot" class="dot offline"></span>
-                    <span id="status-text">OFFLINE</span>
+                
+                <div class="action-buttons">
+                    <button id="btn-start" class="btn btn-primary" onclick="toggleBot('start')">
+                        <i class="fa-solid fa-play"></i> Start Bot
+                    </button>
+                    <button id="btn-stop" class="btn btn-danger" onclick="toggleBot('stop')" disabled>
+                        <i class="fa-solid fa-stop"></i> Stop Bot
+                    </button>
                 </div>
-            </header>
+            </section>
 
-            <main class="grid-layout">
-                <!-- Controls Section -->
-                <section class="controls panel glass slide-up" style="animation-delay: 0.1s;">
-                    <h2>Current Target</h2>
-                    <div class="target-url-box">
-                        <i class="fa-solid fa-link"></i>
-                        <span id="target-url">Loading...</span>
+            <!-- Quick Stats Section -->
+            <section class="quick-stats slide-up" style="animation-delay: 0.2s;">
+                <div class="stat-card glass">
+                    <div class="stat-icon"><i class="fa-solid fa-eye"></i></div>
+                    <div class="stat-content">
+                        <h3>Total Visits</h3>
+                        <p class="stat-value animate-numbers" id="val-visits">0</p>
                     </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon text-purple"><i class="fa-solid fa-globe"></i></div>
+                    <div class="stat-content">
+                        <h3>Countries</h3>
+                        <p class="stat-value animate-numbers" id="val-countries">0</p>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon text-green"><i class="fa-brands fa-google"></i></div>
+                    <div class="stat-content">
+                        <h3>Google Clicks</h3>
+                        <p class="stat-value animate-numbers" id="val-clicks">0</p>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon text-orange"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="stat-content">
+                        <h3>Analytics Fired</h3>
+                        <p class="stat-value animate-numbers" id="val-analytics">0</p>
+                    </div>
+                </div>
+            </section>
 
-                    <div class="action-buttons">
-                        <button id="btn-start" class="btn btn-primary" onclick="toggleBot('start')">
-                            <i class="fa-solid fa-play"></i> Start Bot
-                        </button>
-                        <button id="btn-stop" class="btn btn-danger" onclick="toggleBot('stop')" disabled>
-                            <i class="fa-solid fa-stop"></i> Stop Bot
-                        </button>
+            <!-- Detailed Telemetry -->
+            <section class="telemetry panel glass slide-up" style="animation-delay: 0.3s;">
+                <h2>Live Telemetry</h2>
+                <div class="telemetry-grid">
+                    <div class="telemetry-item">
+                        <span class="label">Threads Active</span>
+                        <span class="value" id="val-threads">0</span>
                     </div>
-                </section>
-
-                <!-- Quick Stats Section -->
-                <section class="quick-stats slide-up" style="animation-delay: 0.2s;">
-                    <div class="stat-card glass">
-                        <div class="stat-icon"><i class="fa-solid fa-eye"></i></div>
-                        <div class="stat-content">
-                            <h3>Total Visits</h3>
-                            <p class="stat-value animate-numbers" id="val-visits">0</p>
-                        </div>
+                    <div class="telemetry-item">
+                        <span class="label">Working Proxies</span>
+                        <span class="value" id="val-proxies">0</span>
                     </div>
-                    <div class="stat-card glass">
-                        <div class="stat-icon text-purple"><i class="fa-solid fa-globe"></i></div>
-                        <div class="stat-content">
-                            <h3>Countries</h3>
-                            <p class="stat-value animate-numbers" id="val-countries">0</p>
-                        </div>
+                    <div class="telemetry-item">
+                        <span class="label">Uptime</span>
+                        <span class="value font-mono" id="val-uptime">00:00:00</span>
                     </div>
-                    <div class="stat-card glass">
-                        <div class="stat-icon text-green"><i class="fa-brands fa-google"></i></div>
-                        <div class="stat-content">
-                            <h3>Google Clicks</h3>
-                            <p class="stat-value animate-numbers" id="val-clicks">0</p>
-                        </div>
+                    <div class="telemetry-item full-width">
+                        <span class="label">Top Countries</span>
+                        <span class="value text-sm" id="val-top-countries">WAITING FOR DATA...</span>
                     </div>
-                    <div class="stat-card glass">
-                        <div class="stat-icon text-orange"><i class="fa-solid fa-chart-line"></i></div>
-                        <div class="stat-content">
-                            <h3>Analytics Fired</h3>
-                            <p class="stat-value animate-numbers" id="val-analytics">0</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Detailed Telemetry -->
-                <section class="telemetry panel glass slide-up" style="animation-delay: 0.3s;">
-                    <h2>Live Telemetry</h2>
-                    <div class="telemetry-grid">
-                        <div class="telemetry-item">
-                            <span class="label">Threads Active</span>
-                            <span class="value" id="val-threads">0</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="label">Working Proxies</span>
-                            <span class="value" id="val-proxies">0</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="label">Uptime</span>
-                            <span class="value font-mono" id="val-uptime">00:00:00</span>
-                        </div>
-                        <div class="telemetry-item full-width">
-                            <span class="label">Top Countries</span>
-                            <span class="value text-sm" id="val-top-countries">WAITING FOR DATA...</span>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <footer class="glass fade-in" style="animation-delay: 0.4s;">
-                <p>SEO MASTERPIECE 2025 | 100% REAL CHROME 131 PATH SIMULATION</p>
-            </footer>
-        </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="glass fade-in" style="animation-delay: 0.4s;">
+            <p>SEO MASTERPIECE 2025 | 100% REAL CHROME 131 PATH SIMULATION</p>
+        </footer>
     </div>
 
     <script>
-        // ==================== LOGIN SYSTEM ====================
-        const CORRECT_USERNAME = "admin";
-        const CORRECT_PASSWORD = "Ramesh@5611";
-
-        function handleLogin() {
-            const username = document.getElementById("username").value.trim();
-            const password = document.getElementById("password").value.trim();
-            const errorMsg = document.getElementById("error-msg");
-
-            if (username === CORRECT_USERNAME && password === CORRECT_PASSWORD) {
-                // Successful login
-                document.getElementById("login-overlay").style.display = "none";
-                document.getElementById("dashboard").style.display = "block";
-
-                // Start the dashboard
-                initDashboard();
-            } else {
-                errorMsg.textContent = "❌ Incorrect username or password";
-                document.getElementById("password").value = "";
-                document.getElementById("password").focus();
-
-                // Shake animation
-                const box = document.querySelector(".login-box");
-                box.style.animation = "shake 0.4s";
-                setTimeout(() => box.style.animation = "", 400);
-            }
-        }
-
-        // Add shake animation
-        const style = document.createElement("style");
-        style.innerHTML = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                20%, 60% { transform: translateX(-8px); }
-                40%, 80% { transform: translateX(8px); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Allow pressing Enter key
-        document.getElementById("password").addEventListener("keypress", function (e) {
-            if (e.key === "Enter") handleLogin();
-        });
-
-        // ==================== ORIGINAL DASHBOARD CODE ====================
         let pollInterval;
 
         function formatTime(seconds) {
@@ -296,11 +115,6 @@
             const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
             const s = Math.floor(seconds % 60).toString().padStart(2, '0');
             return `${h}:${m}:${s}`;
-        }
-
-        function initDashboard() {
-            fetchStats();
-            pollInterval = setInterval(fetchStats, 2000);
         }
 
         async function fetchStats() {
@@ -314,17 +128,19 @@
         }
 
         function updateDashboard(data) {
+            // Update Text Values
             document.getElementById('val-visits').innerText = data.visits.toLocaleString();
             document.getElementById('val-countries').innerText = data.unique_countries;
             document.getElementById('val-clicks').innerText = data.search_clicks.toLocaleString();
             document.getElementById('val-analytics').innerText = data.analytics_fired.toLocaleString();
-
+            
             document.getElementById('val-threads').innerText = data.is_running ? data.threads : 0;
             document.getElementById('val-proxies').innerText = data.active_proxies;
             document.getElementById('val-uptime').innerText = formatTime(data.uptime);
             document.getElementById('val-top-countries').innerText = data.countries_str;
             document.getElementById('target-url').innerText = data.target_url;
 
+            // Update Status Banner
             const dot = document.getElementById('status-dot');
             const text = document.getElementById('status-text');
             const btnStart = document.getElementById('btn-start');
@@ -347,14 +163,17 @@
             try {
                 const res = await fetch(`/api/bot/${action}`, { method: 'POST' });
                 const result = await res.json();
-                if (result.success) {
-                    fetchStats();
+                if(result.success) {
+                    fetchStats(); // Force immediate update
                 }
             } catch (err) {
                 alert("Failed to communicate with server");
             }
         }
+
+        // Initialize polling
+        fetchStats();
+        pollInterval = setInterval(fetchStats, 2000); // 2 second polling
     </script>
 </body>
-
 </html>
