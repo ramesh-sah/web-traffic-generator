@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  seo_booster:
+    build: .
+    container_name: seo_booster_pro
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./SEO_BOOSTER_2025:/app/SEO_BOOSTER_2025
+    restart: unless-stopped
+    env_file:
+      - .env.example
