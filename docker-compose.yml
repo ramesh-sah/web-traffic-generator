@@ -18,12 +18,4 @@ services:
         soft: 65535
         hard: 65535
 
-    # Optional resource limits
-    deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 4G
-        reservations:
-          cpus: '1.0'
-          memory: 2G
+ 
