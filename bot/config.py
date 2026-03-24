@@ -62,10 +62,10 @@ KEYWORDS = [
     "enterprise software solutions nepal", "it consulting nepal"
 ]
 
-THREADS = 15
+THREADS = 20
 OUTPUT_FOLDER = "SEO_BOOSTER_2025"
 PROXY_ROTATE_INTERVAL = 480
-PORT = 5001
+PORT = 5000
 
 # Ensure output folder exists
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
