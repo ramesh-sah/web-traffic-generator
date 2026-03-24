@@ -12,10 +12,18 @@ services:
     env_file:
       - .env.example
 
-    # Critical fix for "Too many open files"
+    # Fixed ulimits for Coolify (soft == hard to avoid permission error)
     ulimits:
       nofile:
         soft: 65535
-        hard: 2097152
+        hard: 65535
 
-    
+    # Optional resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
