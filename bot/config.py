@@ -4,7 +4,7 @@ from pathlib import Path
 # ==================== CONFIG ====================
 
 # Target Website
-TARGET_URL = "https://biznexcloud.com"
+TARGET_URL = "https://rameshkumarsah.com.np"
 
 # Proxy Settings
 # Support for authenticated proxies: "http://user:pass@host:port" or "socks5://user:pass@host:port"
