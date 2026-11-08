@@ -296,6 +296,9 @@ class SEOBoosterBot:
         except Exception as e:
             logger.debug(f"GA4 event '{event_name}' failed: {e}")
             return False
+        except Exception as e:
+            logger.debug(f"GA4 event '{event_name}' failed: {e}")
+            return False
 
     # ==================== PAGE HELPERS ====================
 
